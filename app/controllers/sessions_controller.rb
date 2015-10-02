@@ -16,10 +16,10 @@ class SessionsController < ApplicationController
           if params[:remove_password][:checked] == "yes"
             @user.password_digest = nil
             @user.save
+            flash[:notice] = "Password removed."
           end
         end
-        redirect_to :controller => 'users', :action => 'show', :username => @user.username,
-          :flash => {:remove_password_checked => params[:remove_password][:checked]}
+        redirect_to :controller => 'users', :action => 'show', :username => @user.username
       else
         flash[:notice] = "Incorrect password"
         render :controller => 'users', :action => 'show'
