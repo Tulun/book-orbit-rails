@@ -6,13 +6,19 @@ class SessionsController < ApplicationController
   def create
 
     @user = User.find_by(username: params[:username])
-    
     # If user exists and has a password
     if @user && @user.password_digest
 
       if @user.password_digest == params[:password_digest]
         session[:users] ||= []
         session[:users] << @user.id
+        if params[:remove_password]
+          if params[:remove_password][:checked] == "yes"
+            @user.password_digest = nil
+            @user.save
+            flash[:notice] = "Password removed."
+          end
+        end
         redirect_to :controller => 'users', :action => 'show', :username => @user.username
       else
         flash[:notice] = "Incorrect password"

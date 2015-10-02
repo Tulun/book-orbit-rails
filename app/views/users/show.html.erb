@@ -5,6 +5,9 @@
       <h2><a href="/<%= @user.username%>">all collections</a> / <% if @collection %>
              <%= @collection %>
           <% end %></h2>
+    <% if flash[:notice] %>
+      <div class="notice"><%= flash[:notice] %></div>
+    <% end %>
 
       <% if @collection
         @bookmarks = users_bookmarks_in_collection

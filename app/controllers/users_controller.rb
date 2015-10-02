@@ -5,6 +5,7 @@ class UsersController < ApplicationController
   def show
     # Check if it was a query for a collection
     # TODO: This needs to be moved to collections controller
+
     if params[:collection]
       @collection = params[:collection]
     end
