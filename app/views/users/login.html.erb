@@ -7,8 +7,10 @@
   <p>Please enter your password:</p>
   <%= form_tag({controller: "sessions", action: "create"}, method: "post", class: "pure-form") %>
   <%= password_field_tag :password_digest %>
-   Remove password? <%= check_box("remove_password", "checked") %> <br/>
-  <%= submit_tag "Submit", :class => 'pure-button login-button' %> <br/>
-    </div>
+  <% if !@user.password_digest.nil? %>
+   Remove password? <%= check_box("remove_password", "checked",{}, "yes", "no") %> <br/>
+   <% end %>
+  <%= submit_tag "Submit", :class => 'pure-button login-button' %> 
+  </div>
 </div>
 
