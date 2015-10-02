@@ -5,6 +5,11 @@ class UsersController < ApplicationController
   def show
     # Check if it was a query for a collection
     # TODO: This needs to be moved to collections controller
+    if params[:flash]
+      if params[:flash][:remove_password_checked] == "1"
+        flash[:notice] = "Password removed."
+      end
+    end
     if params[:collection]
       @collection = params[:collection]
     end
